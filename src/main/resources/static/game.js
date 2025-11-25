@@ -108,6 +108,8 @@ async function playSound() {
     const response = await apiCall('/play', 'POST');
 
     if (response.sound) {
+        gameState.currentSound = response.sound;
+
         elements.soundStatus.textContent = 'Listen carefully...';
         updateGameStatus('A sound is playing!');
 
