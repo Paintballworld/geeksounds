@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Geek Sounds - Sound Trivia Game Show</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="game-container">
+        <header class="game-header">
+            <h1 class="game-title">
+                <span class="title-word title-geek">GEEK</span>
+                <span class="title-word title-sounds">SOUNDS</span>
+            </h1>
+            <div class="subtitle">The Ultimate Sound Trivia Game Show</div>
+        </header>
+
+        <div class="main-content">
+            <div class="game-area">
+                <!-- Welcome Screen -->
+                <div id="welcome-screen" class="screen active">
+                    <div class="welcome-content">
+                        <div class="neon-box">
+                            <h2>Ready to Play?</h2>
+                            <p>Test your knowledge of iconic sounds!</p>
+                            <button id="start-game-btn" class="game-button big-button pulse">
+                                <span class="button-icon">▶</span>
+                                <span class="button-text">START GAME</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Playing Screen -->
+                <div id="playing-screen" class="screen">
+                    <div class="sound-display">
+                        <div class="sound-visualizer">
+                            <div class="sound-wave"></div>
+                            <div class="sound-wave"></div>
+                            <div class="sound-wave"></div>
+                            <div class="sound-wave"></div>
+                            <div class="sound-wave"></div>
+                        </div>
+                        <div class="sound-status">
+                            <p id="sound-status-text">Playing sound...</p>
+                        </div>
+                    </div>
+
+                    <div class="control-panel">
+                        <button id="play-btn" class="game-button primary-button">
+                            <span class="button-icon">▶</span>
+                            <span class="button-text">PLAY</span>
+                        </button>
+                        <button id="stop-btn" class="game-button success-button" style="display: none;">
+                            <span class="button-icon">■</span>
+                            <span class="button-text">STOP - SOMEONE GOT IT!</span>
+                        </button>
+                        <button id="skip-btn" class="game-button danger-button" style="display: none;">
+                            <span class="button-icon">⏭</span>
+                            <span class="button-text">SKIP</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Player Selection Screen -->
+                <div id="player-selection-screen" class="screen">
+                    <div class="selection-content">
+                        <h2 class="selection-title">Who guessed it?</h2>
+                        <div id="player-buttons" class="player-grid"></div>
+                    </div>
+                </div>
+
+                <!-- Winner Screen -->
+                <div id="winner-screen" class="screen">
+                    <div class="winner-content">
+                        <div class="trophy-icon">🏆</div>
+                        <h2 class="winner-title">WINNER!</h2>
+                        <div id="winner-names" class="winner-names"></div>
+                        <button id="play-again-btn" class="game-button big-button">
+                            <span class="button-text">PLAY AGAIN</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Bonus Round Screen -->
+                <div id="bonus-screen" class="screen">
+                    <div class="bonus-content">
+                        <div class="bonus-title-wrapper">
+                            <h2 class="bonus-title flash">BONUS ROUND!</h2>
+                            <p class="bonus-subtitle">Tiebreaker - Winner takes all!</p>
+                        </div>
+                        <button id="bonus-start-btn" class="game-button big-button pulse">
+                            <span class="button-text">START BONUS ROUND</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Sound Name Display -->
+                <div id="sound-name-display" class="sound-name-overlay">
+                    <div class="sound-name-content">
+                        <div class="sound-name-label">The Sound Was:</div>
+                        <div id="sound-name-text" class="sound-name-text"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Scoreboard -->
+            <aside class="scoreboard">
+                <h2 class="scoreboard-title">SCOREBOARD</h2>
+                <div id="scoreboard-list" class="scoreboard-list"></div>
+                <div class="scoreboard-footer">
+                    <div id="game-status" class="game-status">Ready to play!</div>
+                </div>
+            </aside>
+        </div>
+    </div>
+
+    <audio id="game-audio" preload="auto"></audio>
+    <audio id="jingle-audio" preload="auto"></audio>
+
+    <script src="game.js"></script>
+</body>
+</html>
