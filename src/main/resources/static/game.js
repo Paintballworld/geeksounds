@@ -19,7 +19,6 @@ const buttons = {
     replay: document.getElementById('replay-btn'),
     stop: document.getElementById('stop-btn'),
     skip: document.getElementById('skip-btn'),
-    wrongGuess: document.getElementById('wrong-guess-btn'),
     playAgain: document.getElementById('play-again-btn'),
     bonusStart: document.getElementById('bonus-start-btn')
 };
@@ -162,27 +161,6 @@ async function stopSound() {
     showScreen(screens.playerSelection);
 }
 
-function wrongGuess() {
-    showScreen(screens.playing);
-    buttons.replay.style.display = 'inline-flex';
-    buttons.stop.style.display = 'inline-flex';
-    buttons.skip.style.display = 'inline-flex';
-    updateGameStatus('Keep playing!');
-
-    // Resume the sound looping
-    if (elements.gameAudio && elements.gameAudio.src) {
-        elements.gameAudio.play();
-        elements.gameAudio.onended = () => {
-            if (gameState.state === 'PLAYING') {
-                setTimeout(() => {
-                    if (gameState.state === 'PLAYING') {
-                        elements.gameAudio.play();
-                    }
-                }, 2000);
-            }
-        };
-    }
-}
 
 async function skipSound() {
     const response = await apiCall('/skip', 'POST');
@@ -227,16 +205,29 @@ function renderPlayerButtons() {
 async function selectPlayer(playerName) {
     // Store the guess info
     currentGuess.playerName = playerName;
-    currentGuess.soundName = gameState.getCurrentSound;
+    currentGuess.soundName = gameState.currentSound;
 
-    // Get the sound name from backend
-    const currentSound = gameState.currentSound;
-    const soundName = formatSoundNameLocal(currentSound);
+    // Get the sound name
+    const soundName = formatSoundNameLocal(gameState.currentSound);
 
-    // Show the overlay with sound name and player
+    // Setup the overlay
     document.getElementById('sound-name-text').textContent = soundName;
-    document.getElementById('selected-player-name').textContent = `Did ${playerName} guess correctly?`;
+    document.getElementById('sound-name-text').style.display = 'none';
+    document.getElementById('selected-player-name').textContent = `${playerName} thinks they know it!`;
+    document.getElementById('reveal-section').style.display = 'block';
+    document.getElementById('confirmation-section').style.display = 'none';
+
+    // Show the overlay
     document.getElementById('sound-name-display').classList.add('show');
+}
+
+function revealAnswer() {
+    // Show the sound name
+    document.getElementById('sound-name-text').style.display = 'block';
+
+    // Hide reveal button, show correct/incorrect buttons
+    document.getElementById('reveal-section').style.display = 'none';
+    document.getElementById('confirmation-section').style.display = 'flex';
 }
 
 function formatSoundNameLocal(filename) {
@@ -385,10 +376,10 @@ function init() {
     buttons.replay.addEventListener('click', replaySound);
     buttons.stop.addEventListener('click', stopSound);
     buttons.skip.addEventListener('click', skipSound);
-    buttons.wrongGuess.addEventListener('click', wrongGuess);
     buttons.playAgain.addEventListener('click', startGame);
     buttons.bonusStart.addEventListener('click', startBonusRound);
 
+    document.getElementById('reveal-btn').addEventListener('click', revealAnswer);
     document.getElementById('correct-btn').addEventListener('click', handleCorrectGuess);
     document.getElementById('incorrect-btn').addEventListener('click', handleIncorrectGuess);
 

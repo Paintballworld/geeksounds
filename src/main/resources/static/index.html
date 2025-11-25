@@ -72,9 +72,6 @@
                     <div class="selection-content">
                         <h2 class="selection-title">Who guessed it?</h2>
                         <div id="player-buttons" class="player-grid"></div>
-                        <button id="wrong-guess-btn" class="game-button danger-button" style="margin-top: 30px;">
-                            <span class="button-text">WRONG GUESS - GO BACK</span>
-                        </button>
                     </div>
                 </div>
 
@@ -106,10 +103,15 @@
                 <!-- Sound Name Display -->
                 <div id="sound-name-display" class="sound-name-overlay">
                     <div class="sound-name-content">
-                        <div class="sound-name-label">The Sound Was:</div>
-                        <div id="sound-name-text" class="sound-name-text"></div>
+                        <div class="sound-name-label">The answer is:</div>
+                        <div id="sound-name-text" class="sound-name-text" style="display: none;"></div>
                         <div id="selected-player-name" class="selected-player-label"></div>
-                        <div class="confirmation-buttons">
+                        <div id="reveal-section">
+                            <button id="reveal-btn" class="game-button big-button">
+                                <span class="button-text">🔍 REVEAL</span>
+                            </button>
+                        </div>
+                        <div class="confirmation-buttons" id="confirmation-section" style="display: none;">
                             <button id="correct-btn" class="game-button success-button">
                                 <span class="button-text">✓ CORRECT</span>
                             </button>
