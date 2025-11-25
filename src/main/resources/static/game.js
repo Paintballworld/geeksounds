@@ -389,6 +389,9 @@ function init() {
     buttons.playAgain.addEventListener('click', startGame);
     buttons.bonusStart.addEventListener('click', startBonusRound);
 
+    document.getElementById('correct-btn').addEventListener('click', handleCorrectGuess);
+    document.getElementById('incorrect-btn').addEventListener('click', handleIncorrectGuess);
+
     updateGameStatus('Ready to play!');
     loadConfig();
 }

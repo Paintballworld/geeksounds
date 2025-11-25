@@ -1,18 +1,24 @@
-# Sound Trivia Game Show
+# Sound Trivia Game
 
-A fun, interactive sound trivia game with a game-show style interface built with Spring Boot and vanilla JavaScript.
+A fun, interactive sound trivia game with a clean, professional interface built with Spring Boot and vanilla JavaScript.
+
+**Free to use and play!** Perfect for team events, parties, or office entertainment.
 
 ## Features
 
-- **Company Branding**: Customizable company/team name and subtitle
-- **Multiple Players**: Configure player names in the properties file
-- **Player Photos**: Display player profile pictures on the scoreboard
-- **Sound Trivia**: Play random sounds and have players guess them
-- **Live Scoreboard**: Real-time leaderboard sorted by score with player avatars
-- **Randomized Jingles**: Multiple celebration and fail sounds randomly selected
-- **Bonus Round**: Automatic tiebreaker when multiple players have the same score
-- **Corporate Design**: Professional blue/red color scheme with animations
-- **Looping Sounds**: Sounds loop with 2-second pauses until guessed or skipped
+- 🎯 **Company Branding**: Customizable company/team name and subtitle
+- 👥 **Multiple Players**: Configure player names and add profile photos
+- 🖼️ **Player Avatars**: Display player profile pictures on the live scoreboard
+- 🎵 **Sound Trivia**: Play random sounds from your collection
+- 🔁 **Replay Button**: Instantly replay sounds that are too short to catch
+- ✅ **Answer Verification**: Confirm correct/incorrect guesses with popup
+- 📊 **Live Scoreboard**: Real-time leaderboard with rankings
+- 🎉 **Randomized Jingles**: Multiple win/lose sounds for variety
+- 🏆 **Bonus Round**: Automatic tiebreaker with harder sounds
+- 🎨 **Professional Design**: Clean, corporate blue/white color scheme
+- 🔄 **Sound Looping**: Sounds repeat with 2-second pauses until answered
+- ⚡ **No Database Required**: All state managed in-memory
+- 📱 **Responsive**: Works on desktop, tablet, and mobile devices
 
 ## Setup
 
@@ -64,25 +70,36 @@ The application will start on `http://localhost:8080`
 
 ## How to Play
 
-1. **Start Game**: Click the big "START GAME" button
-2. **Play Sound**: Click "PLAY" to play a random sound
-3. **Stop**: When someone knows the answer, click "STOP - SOMEONE GOT IT!"
-4. **Select Player**: Click the name of the player who guessed correctly
-5. **Skip**: If nobody knows, click "SKIP" to move to the next sound
-6. **Scoreboard**: Watch the live scoreboard on the right update automatically
-7. **Winner**: After all sounds are played, the winner is announced
-8. **Bonus Round**: If there's a tie, a bonus round automatically starts
+### Game Controls
 
-## Game Flow
+1. **Start Game**: Click "START GAME" to begin
+2. **Play Sound**: Click "PLAY" to hear a random sound
+3. **Play Again**: Click "PLAY AGAIN" to replay the current sound (useful for short sounds)
+4. **Someone Got It**: When a player shouts out the answer, click "STOP - SOMEONE GOT IT!"
+5. **Select Player**: Click the name of the player who thinks they know it
+6. **Verify Answer**: A popup shows the actual sound name with two options:
+   - Click **✓ CORRECT** if they got it right → They get a point + win jingle plays
+   - Click **✗ INCORRECT** if they got it wrong → No point + lose jingle plays
+7. **Wrong Guess Button**: If you selected the wrong player by mistake, click "WRONG GUESS - GO BACK"
+8. **Skip**: If nobody knows, click "SKIP" → Lose jingle plays, move to next sound
 
-1. Game starts with all players at 0 points
-2. Random sounds play from the collection
-3. Players compete to guess the sound
-4. First to guess correctly gets a point
-5. Sound name is displayed for 3 seconds after a correct guess
-6. Continue until all sounds are played
-7. If tie at the end → Bonus round with harder sounds
-8. Winner announced with celebratory animation
+### Game Flow
+
+1. **Setup**: Game starts with all players at 0 points
+2. **Playing**: Sounds loop with 2-second pauses until someone guesses or you skip
+3. **Scoring**: First correct guess gets a point
+4. **Progression**: Continue through all sounds in your collection
+5. **Tiebreaker**: If multiple players tie for first place → Bonus round starts automatically
+6. **Winner**: Celebrate the champion with a trophy animation!
+
+### Scoreboard
+
+- **Live Updates**: Watch scores change in real-time on the right side
+- **Player Photos**: Shows player avatars (or initials if no photo)
+- **Rankings**:
+  - 🥇 First place highlighted in red
+  - 🥈 Second place in blue
+  - 🥉 Third place in green
 
 ## Technical Details
 
@@ -144,9 +161,59 @@ game.company.subtitle=Your Custom Subtitle
 ## Requirements
 
 - Java 17 or higher
-- Gradle 8.x
-- Modern web browser with audio support
+- Gradle 8.x (included via wrapper)
+- Modern web browser with HTML5 audio support
+- Sound files (MP3, WAV, OGG, or M4A format)
+
+## Tips for Best Experience
+
+### Sound Selection
+- Use iconic, recognizable sounds (startup sounds, notification tones, movie quotes)
+- Mix difficulty levels - some easy wins, some challenging
+- Keep sounds between 2-10 seconds for best gameplay
+- Test volume levels to ensure consistency
+
+### Player Photos
+- Square images work best (200x200px or larger)
+- Name files exactly as player names (case-sensitive)
+- Supported: JPG, PNG, GIF, WebP
+
+### Jingles
+- **Win sounds**: Applause, cheers, success fanfares (2-5 seconds)
+- **Lose sounds**: "Wah wah", buzzer, comedic fails (2-5 seconds)
+- Having 3-5 variations keeps the game fresh
+
+### Hosting
+- Run on a laptop connected to speakers for best audio
+- Display on a large screen or projector for visibility
+- One person acts as game master to control the interface
+
+## Troubleshooting
+
+**Sounds not playing?**
+- Check file formats (MP3, WAV, OGG, M4A)
+- Verify files are in the correct directories
+- Check browser console for errors
+
+**Images not showing?**
+- Ensure filenames match player names exactly
+- Check file extensions (.jpg, .png, etc.)
+- Verify images are in `src/main/resources/images/`
+
+**Port already in use?**
+- Change port in `application.properties`
+- Default is 8080, try 8081 or 9000
 
 ## License
 
-Free to use and modify for personal and commercial projects.
+**Free to use and play!**
+
+This project is free to use, modify, and deploy for personal, educational, and commercial purposes. Perfect for:
+- Office team building events
+- Virtual happy hours
+- Birthday parties
+- Educational settings
+- Corporate events
+- Friend gatherings
+
+Enjoy the game! 🎵🎮🎉
