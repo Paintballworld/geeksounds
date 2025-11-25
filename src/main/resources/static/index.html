@@ -3,17 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Geek Sounds - Sound Trivia Game Show</title>
+    <title id="page-title">Sound Trivia Game Show</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="game-container">
         <header class="game-header">
             <h1 class="game-title">
-                <span class="title-word title-geek">GEEK</span>
+                <span class="title-word title-geek" id="company-name">GEEK</span>
                 <span class="title-word title-sounds">SOUNDS</span>
             </h1>
-            <div class="subtitle">The Ultimate Sound Trivia Game Show</div>
+            <div class="subtitle" id="company-subtitle">The Ultimate Sound Trivia Game Show</div>
         </header>
 
         <div class="main-content">
@@ -52,6 +52,10 @@
                             <span class="button-icon">▶</span>
                             <span class="button-text">PLAY</span>
                         </button>
+                        <button id="replay-btn" class="game-button primary-button" style="display: none;">
+                            <span class="button-icon">🔁</span>
+                            <span class="button-text">PLAY AGAIN</span>
+                        </button>
                         <button id="stop-btn" class="game-button success-button" style="display: none;">
                             <span class="button-icon">■</span>
                             <span class="button-text">STOP - SOMEONE GOT IT!</span>
@@ -68,6 +72,9 @@
                     <div class="selection-content">
                         <h2 class="selection-title">Who guessed it?</h2>
                         <div id="player-buttons" class="player-grid"></div>
+                        <button id="wrong-guess-btn" class="game-button danger-button" style="margin-top: 30px;">
+                            <span class="button-text">WRONG GUESS - GO BACK</span>
+                        </button>
                     </div>
                 </div>
 
@@ -101,6 +108,15 @@
                     <div class="sound-name-content">
                         <div class="sound-name-label">The Sound Was:</div>
                         <div id="sound-name-text" class="sound-name-text"></div>
+                        <div id="selected-player-name" class="selected-player-label"></div>
+                        <div class="confirmation-buttons">
+                            <button id="correct-btn" class="game-button success-button">
+                                <span class="button-text">✓ CORRECT</span>
+                            </button>
+                            <button id="incorrect-btn" class="game-button danger-button">
+                                <span class="button-text">✗ INCORRECT</span>
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
