@@ -337,20 +337,13 @@ async function checkGameEnd() {
     await refreshGameState();
 
     if (gameState.state === 'FINISHED') {
-        const sorted = [...gameState.players].sort((a, b) => b.score - a.score);
-        const maxScore = sorted[0].score;
-        const winners = sorted.filter(p => p.score === maxScore);
+        // Fetch and display the riddle
+        const riddleResponse = await apiCall('/riddle', 'GET');
+        const riddleText = riddleResponse.riddle || 'Great job! You completed the game!';
 
-        let winnerText = '';
-        if (winners.length === 1) {
-            winnerText = winners[0].name;
-        } else {
-            winnerText = winners.map(w => w.name).join(' & ');
-        }
-
-        elements.winnerNames.textContent = winnerText;
+        document.getElementById('riddle-text').textContent = riddleText;
         showScreen(screens.winner);
-        updateGameStatus('Game Over!');
+        updateGameStatus('Game Complete!');
 
         playJingle('win');
     }

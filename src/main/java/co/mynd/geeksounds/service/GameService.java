@@ -30,6 +30,9 @@ public class GameService {
     @Value("${game.sounds.bonus.path}")
     private String bonusSoundsPath;
 
+    @Value("${game.riddle}")
+    private String riddle;
+
     public GameService(ResourceLoader resourceLoader) {
         this.resourceLoader = resourceLoader;
         this.gameState = new GameState();
@@ -88,14 +91,7 @@ public class GameService {
     }
 
     public void playerGuessed(String playerName) {
-        Optional<Player> playerOpt = gameState.getPlayers().stream()
-                .filter(p -> p.getName().equals(playerName))
-                .findFirst();
-
-        if (playerOpt.isPresent()) {
-            playerOpt.get().incrementScore();
-        }
-
+        // In cooperative mode, no scoring needed - players work together
         gameState.setCurrentSound(null);
 
         if (gameState.getAvailableSounds().isEmpty()) {
@@ -106,31 +102,8 @@ public class GameService {
     }
 
     private void checkGameEnd() {
-        List<Player> sortedPlayers = gameState.getPlayers().stream()
-                .sorted((p1, p2) -> Integer.compare(p2.getScore(), p1.getScore()))
-                .collect(Collectors.toList());
-
-        if (sortedPlayers.isEmpty()) {
-            gameState.setState(GameState.State.FINISHED);
-            return;
-        }
-
-        int maxScore = sortedPlayers.get(0).getScore();
-        long winnersCount = sortedPlayers.stream()
-                .filter(p -> p.getScore() == maxScore)
-                .count();
-
-        if (winnersCount > 1 && !gameState.isBonusRound()) {
-            startBonusRound();
-        } else {
-            gameState.setState(GameState.State.FINISHED);
-        }
-    }
-
-    private void startBonusRound() {
-        gameState.setBonusRound(true);
-        loadSounds(true);
-        gameState.setState(GameState.State.WAITING);
+        // In cooperative mode, game simply ends when all sounds are played
+        gameState.setState(GameState.State.FINISHED);
     }
 
     private void loadSounds(boolean isBonusRound) {
@@ -170,5 +143,9 @@ public class GameService {
         return gameState.getPlayers().stream()
                 .sorted((p1, p2) -> Integer.compare(p2.getScore(), p1.getScore()))
                 .collect(Collectors.toList());
+    }
+
+    public String getRiddle() {
+        return riddle;
     }
 }
