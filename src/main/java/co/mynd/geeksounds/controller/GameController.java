@@ -124,6 +124,13 @@ public class GameController {
         return ResponseEntity.ok(config);
     }
 
+    @GetMapping("/riddle")
+    public ResponseEntity<Map<String, String>> getRiddle() {
+        Map<String, String> response = new HashMap<>();
+        response.put("riddle", gameService.getRiddle());
+        return ResponseEntity.ok(response);
+    }
+
     @GetMapping("/player-image/{playerName}")
     public ResponseEntity<Resource> getPlayerImage(@PathVariable String playerName) {
         try {
